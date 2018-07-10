@@ -4,10 +4,12 @@
     <title>Document</title>
 </head>
 <body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <link rel="stylesheet" href="css/index.css">
     <div>
         <form>
             <div>
-                <button onclick="youtube()">Connect to Youtube</button><br>
+                <button onclick="youtube()" class='btn waves-effect waves-light'>Connect to Youtube</button><br>
                 <label> Discord Webhook Url</label>
                 <input type="text" id="discordUrl"><br>
                 <label>Channel Id</label>
@@ -15,7 +17,7 @@
                 <label>Subscriber Goal</label>
                 <input type="text" id="subGoal"><br>
             </div>
-            <button type="submit">Apply</button>
+            <button type="submit" class='btn waves-effect waves-light'>Apply</button>
 
         </form>
     </div>

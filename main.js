@@ -42,7 +42,7 @@ request.post({url:'https://accounts.google.com/o/oauth2/token', form: {client_id
 
 
 // set ENV
-process.env.NODE_ENV = 'production';
+//process.env.NODE_ENV = 'production';
 
 const {app, BrowserWindow, Menu, ipcMain, autoUpdater} = electron;
 
