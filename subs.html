@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function playSound(){
+            var audio = document.getElementById("audio");
+            audio.play();
+        }
+    </script>
+    <div>
+        <div>
+            <audio id="audio" src="./Pling-KevanGC-1485374730.wav" ></audio>
+            <img id="gif" src="http://www.galaraf.net/ANIGIFS/Fireworks/fireworks006.gif" alt="HTML5 Doctor Logo" /><br>
+        </div>
+        
+        <label id="label">1/50</label><br>
+        <progress id="subs" value="1" max="50"></progress>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+        var socket = io();
+        var subGoal = 0;
+        socket.on('subs', function(subs){
+            document.getElementById("subs").value = subs;
+            document.getElementById("label").innerHTML = subs + "/" + subGoal;           
+            if(subs>=subGoal){
+                var gif = document.getElementById("gif").style.visibility = "visible";
+                playSound();
+            }else{
+                var gif = document.getElementById("gif").style.visibility = "hidden";
+            }
+        });
+        socket.on('goal', function(goal){
+            subGoal = goal
+        });
+    </script>
+    <style>
+        body {
+            background-color: #00ff00;
+        }
+        #label{
+            margin-left: 100px;
+        }
+        #subs{
+            margin-left: 40px;
+        }
+    </style>
+</body>
+</html>

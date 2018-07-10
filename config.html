@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <form>
+            <div>
+                <button onclick="youtube()">Connect to Youtube</button><br>
+                <label> Discord Webhook Url</label>
+                <input type="text" id="discordUrl"><br>
+                <label>Channel Id</label>
+                <input type="text" id="channelId"><br>
+                <label>Subscriber Goal</label>
+                <input type="text" id="subGoal"><br>
+            </div>
+            <button type="submit">Apply</button>
+
+        </form>
+    </div>
+    <script>
+        const electron = require('electron');
+        const {ipcRenderer} = electron;
+
+        const form = document.querySelector('form');
+        form.addEventListener('submit', submitForm);
+
+        ipcRenderer.send('values', '');
+
+        ipcRenderer.on('defaultChannelId', function(e, id){
+            document.querySelector('#channelId').value = id; 
+        });
+        ipcRenderer.on('defaultDiscordUrl', function(e, id){
+            document.querySelector('#discordUrl').value = id; 
+        });
+        ipcRenderer.on('defaultSubGoal', function(e, id){
+            document.querySelector('#subGoal').value = id; 
+        });
+
+        function youtube(){
+            ipcRenderer.send("config:api", "");
+        }
+        function submitForm(e){
+            e.preventDefault();
+            console.log("submit");
+            const url = document.querySelector('#discordUrl').value;
+            ipcRenderer.send('discord:url', url);
+            const id = document.querySelector('#channelId').value;
+            ipcRenderer.send("channel:id", id);
+            const goal = document.querySelector('#subGoal').value;
+            ipcRenderer.send("sub:goal", goal);
+        }
+    </script>
+</body>
+</html>

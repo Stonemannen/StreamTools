@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Index</title>
+</head>
+<body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script>
+        function play(){
+            var audio = document.getElementById("audio");
+            audio.play();
+        }
+    </script>
+    
+
+    <audio id="audio" src="./Pling-KevanGC-1485374730.wav" ></audio>
+
+    <div>
+        <form>
+            <div>
+                <label>Youtube Livestream ID: </label>
+                <input type="text" id="streamId">
+            </div>
+            <button type="submit" class='btn waves-effect waves-light'>Apply</button>
+        </form>
+    </div>
+
+    <div id='api'>
+        
+    </div>
+    
+    <script>
+            const electron = require('electron');
+            const {ipcRenderer} = electron;
+            const apiDiv = document.querySelector('#api');
+            
+    
+            ipcRenderer.on('message', function(e, message){
+                play();
+                const h5 = document.createElement('h5');
+                const text = document.createTextNode(message);
+                h5.appendChild(text);
+                apiDiv.appendChild(h5); 
+            });
+        
+            const form = document.querySelector('form');
+            form.addEventListener('submit', submitForm);
+        
+            function submitForm(e){
+                console.log("apply");
+                e.preventDefault();
+                const id = document.querySelector('#streamId').value;
+                ipcRenderer.send('stream:id', id);
+            }
+        
+        </script>
+
+    
+</body>
+</html>

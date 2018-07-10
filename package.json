@@ -1,0 +1,35 @@
+{
+  "name": "streamtools",
+  "version": "1.2.1",
+  "description": "livestream tools",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
+    "package-win": "electron-packager . StreamTools --overwrite --asar=true --platform=win32 --arch=ia32 --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"StreamTools\"",
+    "package-linux": "electron-packager . StreamTools --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/icon.png --prune=true --out=release-builds",
+    "win-installer": "grunt create-windows-installer"
+  },
+  "author": "Lucas Drufva <stonemannen1@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "auto-updater": "^1.0.2",
+    "bug-killer": "^4.4.4",
+    "discord.js": "^11.3.2",
+    "electron": "^2.0.4",
+    "electron-squirrel-startup": "^1.0.0",
+    "electron-winstaller": "^2.6.4",
+    "lien": "^3.2.0",
+    "opn": "^5.3.0",
+    "pretty-bytes": "^5.1.0",
+    "r-json": "^1.2.8",
+    "request": "^2.87.0",
+    "socket.io": "^2.1.1",
+    "youtube-api": "^2.0.9"
+  },
+  "devDependencies": {
+    "electron-packager": "^12.1.0",
+    "grunt": "^1.0.3",
+    "grunt-electron-installer": "^2.1.0"
+  }
+}
