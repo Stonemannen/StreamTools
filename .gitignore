@@ -33,6 +33,7 @@ bower_components
 build/Release
 release-builds/
 dist/
+config.txt
 
 # Dependency directories
 node_modules/
@@ -61,3 +62,5 @@ typings/
 
 # next.js build output
 .next
+config.txt
+config.txt
