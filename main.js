@@ -42,16 +42,18 @@ request.post({url:'https://accounts.google.com/o/oauth2/token', form: {client_id
 
 
 // set ENV
-//process.env.NODE_ENV = 'production';
+process.env.NODE_ENV = 'production';
 
-const {app, BrowserWindow, Menu, ipcMain, autoUpdater} = electron;
+
+const {app, BrowserWindow, Menu, ipcMain, autoUpdater, dialog} = electron;
+
 
 let mainWindow;
 let configWindow;
 let oauth2Window;
 
 if(process.env.NODE_ENV == 'production'){
-    const server = 'https://your-deployment-url.com';
+    const server = 'http://212.85.66.117:8085';
     const feed = `${server}/update/${process.platform}/${appVersion}`;
     autoUpdater.setFeedURL(feed);
     setInterval(() => {
@@ -316,9 +318,13 @@ eapp.get('/subs', function (req, res) {
   
 function subs(){
     request.get({url:'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=' + config.channelId, 'auth': {'bearer': token}}, function(err,httpResponse,body){
-        body = JSON.parse(body);
-        var subscribers = parseInt(body.items[0].statistics.subscriberCount);
-        io.emit('subs', subscribers);
+        try {
+            body = JSON.parse(body);
+            var subscribers = parseInt(body.items[0].statistics.subscriberCount);
+            io.emit('subs', subscribers);
+        } catch (error) {
+            
+        }    
         setTimeout(subs,1000);
     });
 }
@@ -326,10 +332,14 @@ function subs(){
 io.on('connection', function(socket){
     if(subsocket){
         request.get({url:'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=' + config.channelId, 'auth': {'bearer': token}}, function(err,httpResponse,body){
-            body = JSON.parse(body);
-            var subscribers = parseInt(body.items[0].statistics.subscriberCount);
-            io.emit('subs', subscribers);
-            io.emit('goal', config.subGoal);
+            try {
+                body = JSON.parse(body);
+                var subscribers = parseInt(body.items[0].statistics.subscriberCount);
+                io.emit('subs', subscribers);
+                io.emit('goal', config.subGoal);
+            } catch (error) {
+                
+            }
             setTimeout(subs,1000);
         });
     }

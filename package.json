@@ -1,6 +1,6 @@
 {
   "name": "streamtools",
-  "version": "1.2.1",
+  "version": "1.2.3",
   "description": "livestream tools",
   "main": "main.js",
   "scripts": {
