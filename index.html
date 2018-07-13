@@ -38,7 +38,7 @@
     
             ipcRenderer.on('message', function(e, message){
                 play();
-                const h5 = document.createElement('h5');
+                const h5 = document.createElement('h6');
                 const text = document.createTextNode(message);
                 h5.appendChild(text);
                 apiDiv.appendChild(h5); 

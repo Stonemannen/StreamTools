@@ -1,1 +1,1 @@
-{}
+{"token":"1/jtdAV_1Uu_8XnRbe-JG87O0e2u8hEeaszIAjziZHM1w9XK799Zq63cjPFgPzskMF","discord_url":"https://discordapp.com/api/webhooks/465971267573645332/LgICfMLd3FKuA6I9tSs_CjX5ikPlxqtxbY4DPqJ3gcsunZYxMmTtwiaZhwGKtDl51gtn","discord_id":"465971267573645332","discord_token":"LgICfMLd3FKuA6I9tSs_CjX5ikPlxqtxbY4DPqJ3gcsunZYxMmTtwiaZhwGKtDl51gtn","channelId":"UClQbsrX5xl-QA2kV6NWuGSQ","channelName":"Beetwin","subGoal":"50"}

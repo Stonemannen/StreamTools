@@ -302,7 +302,7 @@ eapp.get('/oauth2callback', function (req, res) {
 
 });
 eapp.get('/message/:message', function (req, res) {
-    res.send(200);
+    res.sendStatus(200);
     mainWindow.webContents.send('message', req.params.message);
 });
 
