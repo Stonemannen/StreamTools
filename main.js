@@ -15,11 +15,11 @@ var io = require('socket.io')(http);
 var ioReady = false;
 
 try {
-    var config = fs.readFileSync('./config.txt');
+    var config = fs.readFileSync(process.env.APPDATA + '/StreamTools/config.txt');
     config = JSON.parse(config);
 } catch (error) {
     var config = {};
-    fs.writeFileSync('./config.txt', config);
+    fs.writeFileSync(process.env.APPDATA + '/StreamTools/config.txt', config);
 }
 var hook;
 if(config.discord_id){
@@ -139,14 +139,14 @@ ipcMain.on('config:api', function(e, api){
 ipcMain.on('discord:url', function(e, url){
     if(url){
         config.discord_url = url;
-        fs.writeFileSync('./config.txt', JSON.stringify(config));
+        fs.writeFileSync(process.env.APPDATA + '/StreamTools/config.txt', JSON.stringify(config));
         console.log(url);
         request.get(url, function(err,httpResponse,body){
             body = JSON.parse(body);
             console.log(body);
             config.discord_id = body.id;
             config.discord_token = body.token;
-            fs.writeFileSync('./config.txt', JSON.stringify(config));
+            fs.writeFileSync(process.env.APPDATA + '/StreamTools/config.txt', JSON.stringify(config));
         });
     }
     configWindow.close();
@@ -155,7 +155,7 @@ ipcMain.on('discord:url', function(e, url){
 
 ipcMain.on('sub:goal', function(e, goal){
     config.subGoal = goal;
-    fs.writeFileSync('./config.txt', JSON.stringify(config));
+    fs.writeFileSync(process.env.APPDATA + '/StreamTools/config.txt', JSON.stringify(config));
 });
 
 ipcMain.on('channel:id', function(e, id){
@@ -165,7 +165,7 @@ ipcMain.on('channel:id', function(e, id){
             config.channelId = id;
             config.channelName = body.items[0].snippet.title;
             console.log(id);
-            fs.writeFileSync('./config.txt', JSON.stringify(config));
+            fs.writeFileSync(process.env.APPDATA + '/StreamTools/config.txt', JSON.stringify(config));
         })
         
     }
@@ -297,7 +297,7 @@ eapp.get('/oauth2callback', function (req, res) {
         console.log(body);
         let jbody = JSON.parse(body);
         config.token = jbody.refresh_token
-        fs.writeFileSync('./config.txt', JSON.stringify(config));
+        fs.writeFileSync(process.env.APPDATA + '/StreamTools/config.txt', JSON.stringify(config));
     });
 
 });

@@ -38,10 +38,10 @@
     
             ipcRenderer.on('message', function(e, message){
                 play();
-                const h5 = document.createElement('h6');
+                const h6 = document.createElement('h6');
                 const text = document.createTextNode(message);
-                h5.appendChild(text);
-                apiDiv.appendChild(h5); 
+                h6.appendChild(text);
+                apiDiv.insertBefore(h5, apiDiv.childNodes[0]);
             });
         
             const form = document.querySelector('form');
